@@ -25,14 +25,30 @@ function App() {
         setSelectedSchema("");
     };
 
-    const handleSaveSegment = () => {
+    const handleSaveSegment = async () => {
         const data = {
             segment_name: segmentName.trim(),
-            schema: schemas.map(s => ({ [s.value]: s.inputValue })),
+            schema: schemas.map((s) => ({ [s.value]: s.inputValue })),
         };
 
-    console.log( JSON.stringify(data, null, 2));
-    alert("Segment saved! Check console for output.");
+    console.log(JSON.stringify(data, null, 2));
+    try {
+        const response = await fetch("https://webhook.site/YOUR_WEBHOOK_URL", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            alert(" Segment data sent successfully!");
+        } else {
+            alert(" Failed to send data");
+        }
+      } catch (error) {
+          console.error("Error sending data:", error);
+      }
     setShowPopup(false);
     };
     const remainingOptions = SCHEMA_OPTIONS.filter(
