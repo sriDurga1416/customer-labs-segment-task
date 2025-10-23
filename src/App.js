@@ -33,7 +33,7 @@ function App() {
 
     console.log(JSON.stringify(data, null, 2));
     try {
-        const response = await fetch("https://webhook.site/YOUR_WEBHOOK_URL", {
+        const response = await fetch("https://webhook.site/e2be1c4b-ab34-448c-941b-45eb71abbf70", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
